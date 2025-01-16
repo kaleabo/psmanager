@@ -1,245 +1,370 @@
-import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
+'use client'
+
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Shield, Lock, Key, Fingerprint, RefreshCcw, Settings, ArrowRight, Check } from 'lucide-react'
-import { authOptions } from '@/lib/auth/auth.config'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Container } from '@/components/ui/container'
 
 const features = [
   {
-    title: 'Free Forever',
-    description: 'No hidden fees, no premium features. Everything is included.',
+    title: 'Zero-Knowledge Security',
+    description: 'End-to-end encryption ensures only you can access your data.',
     icon: Lock
   },
   {
     title: 'Unlimited Storage',
-    description: 'Store all your passwords without any limitations.',
+    description: 'Store all your passwords and secure notes without limits.',
     icon: Shield
   },
   {
-    title: 'Smart Generator',
-    description: 'Create strong, unique passwords instantly.',
+    title: 'AI-Powered Generator',
+    description: 'Create unbreakable passwords with smart generation.',
     icon: Key
   },
   {
-    title: 'Quick Access',
-    description: 'Use biometrics for fast, secure login.',
+    title: 'Biometric Access', 
+    description: 'Instant secure access with fingerprint and Face ID.',
     icon: Fingerprint
   },
   {
-    title: 'Auto-Fill',
-    description: 'Save time with automatic form filling.',
+    title: 'Smart Autofill',
+    description: 'Context-aware form filling across all platforms.',
     icon: RefreshCcw
   },
   {
-    title: 'Cross-Platform',
-    description: 'Access your passwords on any device.',
+    title: 'Universal Sync',
+    description: 'Real-time sync across all your devices seamlessly.',
     icon: Settings
   }
 ]
 
 const highlights = [
-  'No credit card required',
-  'Unlimited password storage',
-  'Free forever, no hidden fees',
-  'Advanced security features included',
-  'Cross-platform synchronization',
-  'Automatic form filling'
+  'Military-grade encryption',
+  'Unlimited secure storage', 
+  'Free forever guarantee',
+  'AI-powered security features',
+  'Cross-platform availability',
+  'Smart breach monitoring'
 ]
 
-export default async function HomePage() {
-  const session = await getServerSession(authOptions)
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+}
 
-  if (session) {
-    redirect('/dashboard/overview')
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
   }
+}
 
+export default function HomePage() {
   return (
-    <div className="space-y-24">
+    <div className="relative overflow-hidden bg-[#0D0D0D] text-white">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white -z-10" />
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-medium mb-8">
-              100% Free Forever
-              <span className="w-1 h-1 bg-blue-600 rounded-full" />
-              No Credit Card Required
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8">
-              Secure passwords,
-              <span className="text-blue-600"> zero cost</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-              The completely free password manager that keeps your digital life secure.
-              All features included, no premium tier, no hidden fees.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                href="/register"
-                className="group bg-blue-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-700 transition-all hover:shadow-lg inline-flex items-center justify-center gap-2"
+      <section className="relative min-h-screen flex items-center">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+        </div>
+
+        <Container className="relative z-10">
+          <motion.div
+            initial="initial"
+            animate="animate"
+            variants={staggerContainer}
+            className="max-w-5xl mx-auto"
+          >
+            <motion.div
+              variants={fadeIn}
+              className="flex items-center justify-center gap-2 mb-8"
+            >
+              <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm font-medium">
+                <span className="text-purple-400">New</span>
+                {' '}AI-Powered Security{' '}
+                <span className="text-purple-400">2024</span>
+              </span>
+            </motion.div>
+
+            <motion.h1
+              variants={fadeIn} 
+              className="text-7xl md:text-8xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60"
+            >
+              Secure Your Digital
+              <br />
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Future Today
+              </span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeIn}
+              className="text-xl text-white/60 text-center mb-12 max-w-2xl mx-auto"
+            >
+              Experience the next evolution in password security. Military-grade encryption
+              meets artificial intelligence for unparalleled protection.
+            </motion.p>
+
+            <motion.div
+              variants={fadeIn}
+              className="flex flex-col sm:flex-row justify-center gap-6"
+            >
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-lg rounded-2xl px-8 h-14"
               >
-                Get Started Free
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/login"
-                className="bg-white text-gray-900 px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-gray-50 transition-all border border-gray-200 inline-flex items-center justify-center"
+                <Link href="/register">
+                  Get Started Free
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="text-lg rounded-2xl px-8 h-14 border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-sm"
               >
-                Sign In
-              </Link>
-            </div>
-          </div>
+                <Link href="/login">
+                  Sign In
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </Container>
+
+        {/* Animated Background */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute w-[500px] h-[500px] -top-40 -right-20 bg-purple-500/30 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute w-[500px] h-[500px] -bottom-40 -left-20 bg-pink-500/30 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
       </section>
 
       {/* Features Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Everything you need, all for free
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              No premium tier, no feature restrictions. Every user gets access to all features.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <section className="py-32 relative">
+        <Container>
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="text-center mb-20"
+          >
+            <motion.h2
+              variants={fadeIn}
+              className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
+            >
+              The Future is Secure
+            </motion.h2>
+            <motion.p
+              variants={fadeIn}
+              className="text-xl text-white/60 max-w-2xl mx-auto"
+            >
+              Cutting-edge features powered by artificial intelligence
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {features.map((feature) => {
               const Icon = feature.icon
               return (
-                <div
+                <motion.div
                   key={feature.title}
-                  className="group p-8 rounded-2xl bg-white hover:bg-blue-50 transition-colors border border-gray-100 hover:border-blue-100"
+                  variants={fadeIn}
+                  whileHover={{ scale: 1.02 }}
+                  className="group relative bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10 hover:border-purple-500/50 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600/20 transition-colors">
-                    <Icon className="w-6 h-6 text-blue-600" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+                  <div className="relative">
+                    <div className="w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      <Icon className="w-7 h-7 text-purple-400" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                    <p className="text-white/60">{feature.description}</p>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
+                </motion.div>
               )
             })}
-          </div>
-        </div>
+          </motion.div>
+        </Container>
       </section>
 
       {/* Highlights Section */}
-      <section className="py-20 bg-blue-600 text-white">
-        <div className="container mx-auto px-4">
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-pink-900/20" />
+        <Container className="relative">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Free forever means exactly that
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid md:grid-cols-2 gap-16 items-center"
+            >
+              <motion.div variants={fadeIn}>
+                <h2 className="text-5xl md:text-6xl font-bold mb-8">
+                  Enterprise Grade
+                  <br />
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Protection
+                  </span>
                 </h2>
-                <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                  We believe password security should be accessible to everyone. That's why we offer all our features completely free, forever.
+                <p className="text-xl text-white/60 mb-10 leading-relaxed">
+                  Advanced security made accessible. Experience enterprise-level protection with consumer-friendly simplicity.
                 </p>
-                <ul className="space-y-4">
+                <ul className="space-y-6">
                   {highlights.map((highlight) => (
-                    <li key={highlight} className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-4 h-4" />
+                    <motion.li
+                      key={highlight}
+                      variants={fadeIn}
+                      className="flex items-center gap-4"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <Check className="w-5 h-5 text-purple-400" />
                       </div>
-                      <span className="text-lg">{highlight}</span>
-                    </li>
+                      <span className="text-lg text-white/80">{highlight}</span>
+                    </motion.li>
                   ))}
                 </ul>
-              </div>
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl transform rotate-3" />
-                <div className="relative bg-blue-800 p-8 rounded-2xl">
-                  <div className="text-5xl font-bold mb-4">$0</div>
-                  <div className="text-2xl mb-6">Forever Free</div>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center gap-2">
-                      <Check className="w-5 h-5 text-blue-300" />
-                      <span>Unlimited passwords</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="w-5 h-5 text-blue-300" />
-                      <span>All security features</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="w-5 h-5 text-blue-300" />
-                      <span>Cross-platform sync</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="w-5 h-5 text-blue-300" />
-                      <span>Password sharing</span>
-                    </li>
+              </motion.div>
+
+              <motion.div
+                variants={fadeIn}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-3xl transform rotate-3 scale-105 blur-2xl" />
+                <Card className="relative bg-gradient-to-br from-white/10 to-white/5 p-10 rounded-3xl border-0 backdrop-blur-xl">
+                  <div className="text-8xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    $0
+                  </div>
+                  <div className="text-2xl mb-10 text-black">Forever Free</div>
+                  <ul className="space-y-5 mb-10">
+                    {['Unlimited passwords', 'AI-powered security', 'Cross-platform sync', 'Premium support'].map((feature) => (
+                      <li key={feature} className="flex items-center gap-3">
+                        <Check className="w-5 h-5 text-purple-400" />
+                        <span className="text-black">{feature}</span>
+                      </li>
+                    ))}
                   </ul>
-                  <Link
-                    href="/register"
-                    className="block w-full bg-white text-blue-600 text-center px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors"
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl h-14 text-lg"
                   >
-                    Get Started
-                  </Link>
-                </div>
-              </div>
-            </div>
+                    <Link href="/register">
+                      Get Started
+                    </Link>
+                  </Button>
+                </Card>
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Common questions</h2>
-              <p className="text-xl text-gray-600">
-                Everything you need to know about our free service
+      <section className="py-32">
+        <Container>
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="max-w-3xl mx-auto"
+          >
+            <motion.div
+              variants={fadeIn}
+              className="text-center mb-16"
+            >
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">Common Questions</h2>
+              <p className="text-xl text-white/60">
+                Everything you need to know about our platform
               </p>
-            </div>
-            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-2xl border border-gray-100">
-                <h3 className="text-xl font-semibold mb-2">Is it really free?</h3>
-                <p className="text-gray-600">
-                  Yes, absolutely! We believe in making password security accessible to everyone.
-                  There are no premium features, no hidden fees, and no credit card required.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl border border-gray-100">
-                <h3 className="text-xl font-semibold mb-2">How do you make money?</h3>
-                <p className="text-gray-600">
-                  We're community-supported and run on minimal costs. Our mission is to provide
-                  secure password management for everyone, not to maximize profit.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl border border-gray-100">
-                <h3 className="text-xl font-semibold mb-2">What about my privacy?</h3>
-                <p className="text-gray-600">
-                  Your security is our top priority. All data is encrypted locally on your device,
-                  and we never have access to your passwords or sensitive information.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+
+            <motion.div
+              variants={staggerContainer}
+              className="space-y-6"
+            >
+              {[
+                {
+                  q: 'How secure is the platform?',
+                  a: 'We use military-grade AES-256 encryption with zero-knowledge architecture. Your data is encrypted before it leaves your device - even we can\'t access it.'
+                },
+                {
+                  q: 'Why is it free?',
+                  a: 'We believe everyone deserves top-tier security. Our efficient infrastructure and community support keep costs low, allowing us to offer enterprise features at no cost.'
+                },
+                {
+                  q: 'What about data privacy?',
+                  a: 'Your security is paramount. All data is encrypted locally using advanced algorithms, and we follow a strict zero-knowledge policy.'
+                }
+              ].map(({ q, a }) => (
+                <motion.div
+                  key={q}
+                  variants={fadeIn}
+                  className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300"
+                >
+                  <h3 className="text-xl font-semibold mb-3">{q}</h3>
+                  <p className="text-white/60 leading-relaxed">{a}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </Container>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Join thousands of users today
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Experience secure, unlimited password management without spending a penny.
-              No credit card required, no hidden fees, just sign up and start using.
-            </p>
-            <Link
-              href="/register"
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-700 transition-all hover:shadow-lg"
+      <section className="py-32 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-pink-900/20" />
+        <Container>
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <motion.h2
+              variants={fadeIn}
+              className="text-5xl md:text-6xl font-bold mb-6"
             >
-              Get Started Free
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
+              Ready to Get Started?
+            </motion.h2>
+            <motion.p
+              variants={fadeIn}
+              className="text-xl text-white/60 mb-10"
+            >
+              Join thousands of users protecting their digital lives with AI-powered security.
+              No credit card required.
+            </motion.p>
+            <motion.div variants={fadeIn}>
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-lg rounded-2xl px-8 h-14"
+              >
+                <Link href="/register">
+                  Start Protecting Your Passwords
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </Container>
       </section>
     </div>
   )
-} 
+}
