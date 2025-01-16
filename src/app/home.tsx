@@ -1,124 +1,49 @@
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
-import Image from 'next/image'
-import { Shield, Lock, Key, Fingerprint, RefreshCcw, Settings, Check } from 'lucide-react'
+import { Shield, Lock, Key, Fingerprint, RefreshCcw, Settings, ArrowRight, Check } from 'lucide-react'
 import { authOptions } from '@/lib/auth/auth.config'
 
 const features = [
   {
-    title: 'Secure Password Storage',
-    description: 'Store all your passwords in an encrypted vault with military-grade security.',
-    icon: Shield
-  },
-  {
-    title: 'Password Generator',
-    description: 'Create strong, unique passwords with our advanced generator.',
-    icon: Key
-  },
-  {
-    title: 'Biometric Authentication',
-    description: 'Quick and secure access using your fingerprint or face ID.',
-    icon: Fingerprint
-  },
-  {
-    title: 'Auto-Fill Support',
-    description: 'Automatically fill in your credentials across websites and apps.',
-    icon: RefreshCcw
-  },
-  {
-    title: 'End-to-End Encryption',
-    description: 'Your data is encrypted and decrypted only on your device.',
+    title: 'Free Forever',
+    description: 'No hidden fees, no premium features. Everything is included.',
     icon: Lock
   },
   {
-    title: 'Cross-Platform Sync',
-    description: 'Access your passwords seamlessly across all your devices.',
+    title: 'Unlimited Storage',
+    description: 'Store all your passwords without any limitations.',
+    icon: Shield
+  },
+  {
+    title: 'Smart Generator',
+    description: 'Create strong, unique passwords instantly.',
+    icon: Key
+  },
+  {
+    title: 'Quick Access',
+    description: 'Use biometrics for fast, secure login.',
+    icon: Fingerprint
+  },
+  {
+    title: 'Auto-Fill',
+    description: 'Save time with automatic form filling.',
+    icon: RefreshCcw
+  },
+  {
+    title: 'Cross-Platform',
+    description: 'Access your passwords on any device.',
     icon: Settings
   }
 ]
 
-const pricingPlans = [
-  {
-    name: 'Free',
-    price: '$0',
-    description: 'Perfect for getting started',
-    features: [
-      'Up to 50 passwords',
-      'Basic password generator',
-      'Secure storage',
-      'Mobile access'
-    ]
-  },
-  {
-    name: 'Pro',
-    price: '$4.99',
-    period: '/month',
-    description: 'Best for personal use',
-    features: [
-      'Unlimited passwords',
-      'Advanced password generator',
-      'Secure file storage',
-      'Priority support',
-      'Password sharing',
-      'Dark web monitoring'
-    ],
-    featured: true
-  },
-  {
-    name: 'Team',
-    price: '$9.99',
-    period: '/user/month',
-    description: 'Perfect for small teams',
-    features: [
-      'Everything in Pro',
-      'Team management',
-      'Access controls',
-      'Activity logs',
-      'API access',
-      'SSO integration'
-    ]
-  }
-]
-
-const testimonials = [
-  {
-    quote: "SecurePass has completely transformed how I manage my online security. It's intuitive and reliable.",
-    author: "Sarah Johnson",
-    role: "Software Engineer",
-    avatar: "/avatars/sarah.jpg"
-  },
-  {
-    quote: "The best password manager I've ever used. The auto-fill feature saves me so much time.",
-    author: "Michael Chen",
-    role: "Digital Marketer",
-    avatar: "/avatars/michael.jpg"
-  },
-  {
-    quote: "As a business owner, SecurePass gives me peace of mind knowing our team's passwords are secure.",
-    author: "Emma Davis",
-    role: "CEO at TechStart",
-    avatar: "/avatars/emma.jpg"
-  }
-]
-
-const faqs = [
-  {
-    question: "How secure is SecurePass?",
-    answer: "SecurePass uses military-grade encryption (AES-256) to protect your data. Your master password is never stored on our servers, and all encryption/decryption happens locally on your device."
-  },
-  {
-    question: "Can I access my passwords offline?",
-    answer: "Yes! Once you've synced your passwords, you can access them offline on any device where you're logged in."
-  },
-  {
-    question: "What happens if I forget my master password?",
-    answer: "For security reasons, we cannot recover your master password. However, you can set up recovery methods like biometric authentication or recovery codes."
-  },
-  {
-    question: "Can I share passwords securely with my team?",
-    answer: "Yes, our Pro and Team plans include secure password sharing features with granular access controls."
-  }
+const highlights = [
+  'No credit card required',
+  'Unlimited password storage',
+  'Free forever, no hidden fees',
+  'Advanced security features included',
+  'Cross-platform synchronization',
+  'Automatic form filling'
 ]
 
 export default async function HomePage() {
@@ -129,29 +54,36 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="space-y-32">
+    <div className="space-y-24">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 bg-gradient-to-b from-white to-gray-50">
+      <section className="relative pt-24 pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white -z-10" />
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-8">
-              Secure Your Digital Life with
-              <span className="text-blue-600"> SecurePass</span>
+            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-medium mb-8">
+              100% Free Forever
+              <span className="w-1 h-1 bg-blue-600 rounded-full" />
+              No Credit Card Required
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8">
+              Secure passwords,
+              <span className="text-blue-600"> zero cost</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-              The modern password manager that keeps your online accounts safe and accessible.
-              Generate strong passwords, store them securely, and access them anywhere.
+            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+              The completely free password manager that keeps your digital life secure.
+              All features included, no premium tier, no hidden fees.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 href="/register"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="group bg-blue-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-700 transition-all hover:shadow-lg inline-flex items-center justify-center gap-2"
               >
                 Get Started Free
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/login"
-                className="bg-white text-gray-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors border border-gray-200"
+                className="bg-white text-gray-900 px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-gray-50 transition-all border border-gray-200 inline-flex items-center justify-center"
               >
                 Sign In
               </Link>
@@ -160,26 +92,26 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
+      {/* Features Grid */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">
-              Everything you need in a password manager
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Everything you need, all for free
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Powerful features to help you manage your passwords securely and efficiently
+              No premium tier, no feature restrictions. Every user gets access to all features.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {features.map((feature) => {
               const Icon = feature.icon
               return (
                 <div
                   key={feature.title}
-                  className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                  className="group p-8 rounded-2xl bg-white hover:bg-blue-50 transition-colors border border-gray-100 hover:border-blue-100"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600/20 transition-colors">
                     <Icon className="w-6 h-6 text-blue-600" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -191,132 +123,121 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-gray-50">
+      {/* Highlights Section */}
+      <section className="py-20 bg-blue-600 text-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Simple, transparent pricing</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the plan that best fits your needs
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {pricingPlans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`
-                  bg-white rounded-xl shadow-sm p-8
-                  ${plan.featured ? 'ring-2 ring-blue-600 shadow-lg scale-105' : ''}
-                `}
-              >
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <div className="flex items-baseline mb-4">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.period && (
-                    <span className="text-gray-600 ml-1">{plan.period}</span>
-                  )}
-                </div>
-                <p className="text-gray-600 mb-6">{plan.description}</p>
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <Check className="w-5 h-5 text-green-500 mr-2" />
-                      <span>{feature}</span>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                  Free forever means exactly that
+                </h2>
+                <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+                  We believe password security should be accessible to everyone. That's why we offer all our features completely free, forever.
+                </p>
+                <ul className="space-y-4">
+                  {highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-4 h-4" />
+                      </div>
+                      <span className="text-lg">{highlight}</span>
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/register"
-                  className={`
-                    w-full text-center px-6 py-3 rounded-lg font-semibold transition-colors block
-                    ${plan.featured
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
-                      : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                    }
-                  `}
-                >
-                  Get Started
-                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Trusted by thousands</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See what our users have to say about SecurePass
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {testimonials.map((testimonial) => (
-              <div
-                key={testimonial.author}
-                className="bg-gray-50 p-8 rounded-xl"
-              >
-                <div className="flex items-center mb-6">
-                  <div className="relative w-12 h-12 mr-4">
-                    <Image
-                      src={testimonial.avatar}
-                      alt={testimonial.author}
-                      fill
-                      className="rounded-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">{testimonial.author}</h4>
-                    <p className="text-gray-600">{testimonial.role}</p>
-                  </div>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl transform rotate-3" />
+                <div className="relative bg-blue-800 p-8 rounded-2xl">
+                  <div className="text-5xl font-bold mb-4">$0</div>
+                  <div className="text-2xl mb-6">Forever Free</div>
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center gap-2">
+                      <Check className="w-5 h-5 text-blue-300" />
+                      <span>Unlimited passwords</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-5 h-5 text-blue-300" />
+                      <span>All security features</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-5 h-5 text-blue-300" />
+                      <span>Cross-platform sync</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-5 h-5 text-blue-300" />
+                      <span>Password sharing</span>
+                    </li>
+                  </ul>
+                  <Link
+                    href="/register"
+                    className="block w-full bg-white text-blue-600 text-center px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors"
+                  >
+                    Get Started
+                  </Link>
                 </div>
-                <p className="text-gray-600 italic">"{testimonial.quote}"</p>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Got questions? We've got answers
-            </p>
-          </div>
           <div className="max-w-3xl mx-auto">
-            <div className="space-y-8">
-              {faqs.map((faq) => (
-                <div key={faq.question} className="bg-white p-6 rounded-xl shadow-sm">
-                  <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </div>
-              ))}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Common questions</h2>
+              <p className="text-xl text-gray-600">
+                Everything you need to know about our free service
+              </p>
+            </div>
+            <div className="space-y-6">
+              <div className="bg-white p-6 rounded-2xl border border-gray-100">
+                <h3 className="text-xl font-semibold mb-2">Is it really free?</h3>
+                <p className="text-gray-600">
+                  Yes, absolutely! We believe in making password security accessible to everyone.
+                  There are no premium features, no hidden fees, and no credit card required.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl border border-gray-100">
+                <h3 className="text-xl font-semibold mb-2">How do you make money?</h3>
+                <p className="text-gray-600">
+                  We're community-supported and run on minimal costs. Our mission is to provide
+                  secure password management for everyone, not to maximize profit.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl border border-gray-100">
+                <h3 className="text-xl font-semibold mb-2">What about my privacy?</h3>
+                <p className="text-gray-600">
+                  Your security is our top priority. All data is encrypted locally on your device,
+                  and we never have access to your passwords or sensitive information.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to secure your passwords?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of users who trust SecurePass for their password security.
-            Start your free trial today.
-          </p>
-          <Link
-            href="/register"
-            className="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
-          >
-            Get Started Free
-          </Link>
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Join thousands of users today
+            </h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Experience secure, unlimited password management without spending a penny.
+              No credit card required, no hidden fees, just sign up and start using.
+            </p>
+            <Link
+              href="/register"
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-700 transition-all hover:shadow-lg"
+            >
+              Get Started Free
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
