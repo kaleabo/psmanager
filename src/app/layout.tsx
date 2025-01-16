@@ -1,14 +1,11 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { AuthProvider } from "@/components/providers/AuthProvider";
-import "./globals.css";
+import { Header } from '@/components/marketing/Header'
+import { Footer } from '@/components/marketing/Footer'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Password Manager",
-  description: "Secure password management solution",
-};
+export const metadata = {
+  title: 'SecurePass - Password Manager',
+  description: 'Secure your digital life with SecurePass password manager',
+}
 
 export default function RootLayout({
   children,
@@ -17,9 +14,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <AuthProvider>{children}</AuthProvider>
+      <body>
+        <div className="min-h-screen flex flex-col bg-gray-50">
+          <Header />
+          <main className="flex-1 pt-16">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
-  );
+  )
 }
