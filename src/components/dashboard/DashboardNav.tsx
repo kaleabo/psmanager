@@ -12,7 +12,7 @@ import {
 const navItems = [
   {
     title: 'Dashboard',
-    href: '/dashboard',
+    href: '/dashboard/overview',
     icon: HomeIcon
   },
   {
