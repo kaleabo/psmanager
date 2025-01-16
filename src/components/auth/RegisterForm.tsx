@@ -64,7 +64,7 @@ export function RegisterForm() {
         )}
         
         <div className="space-y-2">
-          <Label htmlFor="name">Name</Label>
+          <Label className="text-white" htmlFor="name">Name</Label>
           <Input
             id="name"
             name="name"
@@ -76,7 +76,7 @@ export function RegisterForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label className="text-white" htmlFor="email">Email</Label>
           <Input
             id="email"
             name="email"
@@ -88,7 +88,7 @@ export function RegisterForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
+          <Label className="text-white" htmlFor="password">Password</Label>
           <Input
             id="password"
             name="password"
