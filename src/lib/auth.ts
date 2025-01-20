@@ -1,8 +1,41 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
 import { AuthOptions } from 'next-auth'
-// Import your providers and other dependencies here
+import GoogleProvider from 'next-auth/providers/google'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import { db } from '@/lib/db'
+
+export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(db as any),
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+  ],
+  session: {
+    strategy: 'jwt'
+  },
+  pages: {
+    signIn: '/login',
+    error: '/auth/error',
+  },
+  callbacks: {
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.sub!
+      }
+      return session
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+      }
+      return token
+    }
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+}
 
 export async function getAuthSession() {
   const session = await getServerSession(authOptions)
@@ -17,12 +50,4 @@ export async function requireAuth() {
   }
   
   return session
-}
-
-export const authOptions: AuthOptions = {
-  // Your existing auth configuration...
-  providers: [
-    // Your providers...
-  ],
-  // Other options...
 } 
